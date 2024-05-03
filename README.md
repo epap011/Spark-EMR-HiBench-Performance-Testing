@@ -11,7 +11,8 @@
 7. Security configuration and EC2 key pair: your key-pair
 8. IAM roles: Service role -> EMR_DefaultRole
 9. EC2 instance profile for Amazon EMR: Instance Profile -> EMR_EC2_DefaultRole
-10. select Create cluster  
+10. Make sure to check "Manually terminate cluster" in the Cluster termination and node replacement section.
+11. select Create cluster  
 
 ## Environment setup (Hibench)  
 ssh to the primary node of the EMR cluster you just created.  
@@ -27,7 +28,7 @@ Clone the Hibench repo
 cd into the Hibench folder  
 > cd Hibench  
 
-> mvn -Dspark=3.1 -Dscala=2.2 clean package  
+> mvn -Dspark=3.1 -Dscala=2.12 clean package  
 
 ## Setup Spark-bench
 > cd Hibench (you may already be there :P)  
@@ -51,3 +52,7 @@ hibench.spark.home -> /usr/lib/spark
 > bin/workloads/micro/wordcount/prepare/prepare.sh  
 
 > bin/workloads/micro/wordcount/spark/run.sh
+
+## Other
+
+see `clues.md` for works in progress.
