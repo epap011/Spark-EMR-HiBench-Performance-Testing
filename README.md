@@ -18,41 +18,48 @@
 ssh to the primary node of the EMR cluster you just created.  
 
 Install git and maven  
-> sudo yum install git, maven  
+`sudo yum install git, maven`  
 
 Clone the Hibench repo  
-> git clone https://github.com/Intel-bigdata/HiBench  
+`git clone https://github.com/Intel-bigdata/HiBench`  
 
 
 ## Build Hibench
 cd into the Hibench folder  
-> cd Hibench  
+`cd ~/Hibench`  
 
-> mvn -Dspark=3.1 -Dscala=2.12 clean package  
+`mvn -Dspark=3.1 -Dscala=2.12 clean package`  
 
 ## Setup Spark-bench
-> cd Hibench (you may already be there :P)  
+```
+cd ~/Hibench  
 
-> cp conf/hadoop.conf.template conf/hadoop.conf  
+cp conf/hadoop.conf.template conf/hadoop.conf  
 
-> vim conf/hadoop.conf  
+vim conf/hadoop.conf
+```
 
-hibench.hadoop.home -> /usr/lib/hadoop  
-hibench.hdfs.master -> (output of: hdfs getconf -confKey fs.defaultFS)  
+hibench.hadoop.home /usr/lib/hadoop  
+hibench.hdfs.master (output of: hdfs getconf -confKey fs.defaultFS)  
+hibench.hadoop.examples.jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
 
-> cp conf/spark.conf.template conf/spark.conf  
+hibench.hadoop.examples.test.jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-client-jobclient.jar
 
-> vim conf/spark.conf  
+```
+cp conf/spark.conf.template conf/spark.conf  
 
-hibench.spark.home -> /usr/lib/spark  
+vim conf/spark.conf  
+```
+hibench.spark.home /usr/lib/spark  
 
-## Run Spark-bench  
-> cd Hibench
+if error during the execution of run.sh change `hibench.spark.master    yarn`
 
-> bin/workloads/micro/wordcount/prepare/prepare.sh  
+## Run a test Spark-bench workload   
 
-> bin/workloads/micro/wordcount/spark/run.sh
+```
+cd ~/Hibench
 
-## Other
+./bin/workloads/micro/wordcount/prepare/prepare.sh  
 
-see `clues.md` for works in progress.
+./bin/workloads/micro/wordcount/spark/run.sh
+```
