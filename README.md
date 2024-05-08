@@ -63,3 +63,11 @@ cd ~/Hibench
 
 ./bin/workloads/micro/wordcount/spark/run.sh
 ```
+
+## Change dataset size 
+
+on `conf/hibench.conf` change the `hibench.scale.profile`
+
+## Check hdfs status
+
+`hdfs dfsadmin -report`

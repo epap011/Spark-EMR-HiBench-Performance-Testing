@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Download Prerequisites
-sudo yum install git maven
+sudo yum install -y git maven
 git clone https://github.com/Intel-bigdata/HiBench
 
 cd HiBench
