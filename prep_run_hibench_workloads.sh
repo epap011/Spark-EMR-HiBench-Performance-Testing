@@ -8,4 +8,4 @@ cd ~/HiBench
 ./bin/workloads/micro/sort/spark/run.sh
 ./bin/workloads/sql/join/spark/run.sh
 
-cat /report/hibench.report
+cat /home/hadoop/HiBench/report/hibench.report
