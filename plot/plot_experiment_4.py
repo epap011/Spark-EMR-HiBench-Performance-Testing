@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-sort_throughputs = [137340726, 149046757]
-join_throughputs = [130904746, 169677194]
-rf_throughputs   = [15200433 , 24516052]
+sort_throughputs = [137340726, 176128006]
+join_throughputs = [130904746, 182072990]
+rf_throughputs   = [15200433 , 27370327]
 
-sort_duration = ["237s", "218s"]
-join_duration   = ["145s", "112s"]
-rf_duration = ["1578s", "978s"]
+sort_duration = ["237s", "184s"]
+join_duration   = ["145s", "104s"]
+rf_duration = ["1578s", "876s"]
 
 fig, ax = plt.subplots()
 
@@ -29,7 +29,7 @@ def autolabel(rects, data):
         height = rect.get_height()
         ax.annotate('{}'.format(val),
                     xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),  # 3 points vertical offset
+                    xytext=(0, 3),
                     textcoords="offset points",
                     ha='center', va='bottom')
 
