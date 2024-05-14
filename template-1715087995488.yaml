@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EMR cluster in order to run Hibench
+
+Parameters:
+  KeyName:
+    Description: my_keypair_name
+    Type: AWS::EC2::KeyPair::KeyName
+  InstanceType:
+    Type: String
+
+Resources:
+  Cluster:
+    Type: AWS::EMR::Cluster
+    Properties:
+      Name: CS543_HiBench_EMRCluster
+      ReleaseLabel: emr-6.5.0
+      Applications:
+        - Name: Spark
+          Version: 3.1.2
+        - Name: Hadoop
+          Version: 3.2.1
+        - Name: Livy
+          Version: 0.7.1
+        - Name: Hive
+          Version: 3.1.2
+        - Name: JupyterEnterpriseGateway
+          Version: 2.1.0
+      Instances:
+        Ec2KeyName: !Ref KeyName
+        KeepJobFlowAliveWhenNoSteps: false
+        TerminationProtected: true
+        MasterInstanceGroup:
+          InstanceCount: 1
+          InstanceType: !Ref InstanceType
+          Market: ON_DEMAND
+          Name: cfnMaster
+        CoreInstanceGroup:
+          InstanceCount: 1
+          InstanceType: !Ref InstanceType
+          Market: ON_DEMAND
+          Name: cfnCore
+        TaskInstanceGroups:
+          - InstanceCount: 1
+            InstanceType: !Ref InstanceType
+            Market: ON_DEMAND
+            Name: hibenchTask-1
+      VisibleToAllUsers: true
+      ServiceRole: EMR_DefaultRole
+      JobFlowRole: EMR_EC2_DefaultRole
