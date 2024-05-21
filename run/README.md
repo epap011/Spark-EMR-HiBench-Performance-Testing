@@ -65,7 +65,7 @@ The script sequentially prepares all input data on the cluster's HDFS and sequen
 
 ## Change dataset size
 
-On `conf/hibench.conf` change hibench.scale.profile`. In our experiments we used the `gigantic` dataset size.
+On `conf/hibench.conf` change `hibench.scale.profile`. In our experiments we used the `gigantic` dataset size.
 
 
 
