@@ -50,8 +50,9 @@ elif benchmark_name == 'Join':
 elif benchmark_name == 'RF':
     plt.ylim(0, max(rf_throughputs) + 1000000)
 
-legend_labels = ['1 Executors, 8 Cores, 2GB', '2 Executors, 4 Cores, 4GB', '4 Executors, 2 Cores, 4GB', '8 Executors, 1 Cores, 2GB']
+legend_labels = ['1 Executors, 8 Cores, 16GB', '2 Executors, 4 Cores, 4GB', '4 Executors, 2 Cores, 4GB', '8 Executors, 1 Cores, 2GB']
 plt.legend(bars, legend_labels)
+plt.title(benchmark_name + ' Benchmark')
 plt.tight_layout()
 plt.savefig('figures/experiment_1_' + benchmark_name + '_results.png')
 plt.show()
