@@ -1,73 +1,23 @@
-# Spark-EMR-HiBench-Performance-Testing
+# Analyzing Spark Cluster Performance in Amazon EMR
 
-## Setup EMR Cluster 
-
-1. Go to EMR Service
-2. Select **Create a cluster**
-3. Amazon EMR release: emr-6.5.0 (for spark 3.1)
-4. Application bundle: Spark 3.1.2, Hadoop 3.2.1, Livy 0.7.1, Hive 3.1.2, JupyterEnterpriseGateway 2.1.0
-5. Networking: choose VPC -> csd543-vpc-vpc  
-6. Networking: choose subnet -> csd543-vpc-subnet-public2-us-east-1b
-7. Security configuration and EC2 key pair: your key-pair
-8. IAM roles: Service role -> EMR_DefaultRole
-9. EC2 instance profile for Amazon EMR: Instance Profile -> EMR_EC2_DefaultRole
-10. Make sure to check "Manually terminate cluster" in the Cluster termination and node replacement section.
-11. select Create cluster  
-
-## Environment setup (Hibench)  
-ssh to the primary node of the EMR cluster you just created.  
-
-Install git and maven  
-`sudo yum install git, maven`  
-
-Clone the Hibench repo  
-`git clone https://github.com/Intel-bigdata/HiBench`  
+### CS543: Big Data Project | UOC
 
 
-## Build Hibench
-cd into the Hibench folder  
-`cd ~/Hibench`  
 
-`mvn -Dspark=3.1 -Dscala=2.12 clean package`  
+| [stzagkarak@csd.uoc.gr](mailto:stzagkarak@csd.uoc.gr) | [papageorgiou@csd.uoc.gr](mailto:papageorgiou@csd.uoc.gr) | [apostolou@csd.uoc.gr](mailto:apostolou@csd.uoc.gr) |
+| ----------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------- |
 
-## Setup Spark-bench
-```
-cd ~/Hibench  
+This git repository contains all available resources used in our project in `CS543: Big Data` .
 
-cp conf/hadoop.conf.template conf/hadoop.conf  
 
-vim conf/hadoop.conf
-```
 
-hibench.hadoop.home /usr/lib/hadoop  
-hibench.hdfs.master (output of: hdfs getconf -confKey fs.defaultFS)  
-hibench.hadoop.examples.jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
+## Overview
 
-hibench.hadoop.examples.test.jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-client-jobclient.jar
+Under the `plot` directory you can find all generated plots used on our report. 
 
-```
-cp conf/spark.conf.template conf/spark.conf  
+Under the `run` directory you can find instructions to run similar experiments on an Amazon EMR cluster. 
 
-vim conf/spark.conf  
-```
-hibench.spark.home /usr/lib/spark  
+ 
 
-if error during the execution of run.sh change `hibench.spark.master    yarn`
+> Spring 2024
 
-## Run a test Spark-bench workload   
-
-```
-cd ~/Hibench
-
-./bin/workloads/micro/wordcount/prepare/prepare.sh  
-
-./bin/workloads/micro/wordcount/spark/run.sh
-```
-
-## Change dataset size 
-
-on `conf/hibench.conf` change the `hibench.scale.profile`
-
-## Check hdfs status
-
-`hdfs dfsadmin -report`
